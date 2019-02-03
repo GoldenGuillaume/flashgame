@@ -1,0 +1,120 @@
+<nav class="navbar navbar-icon-top navbar-expand-lg navbar-dark bg-dark" role="navigation">
+
+  <!-- Navbar Header with brand and toggle button -->
+  <!-- Brand in left position -->
+  <!-- Toggle button -->
+
+  <a class="navbar-brand" href="#">Game</a>
+  <button class="navbar-toggler minus collapsed" type="button" data-toggle="collapse" data-target="#contentId" aria-controls="contentId" aria-expanded="false" aria-label="Toggle Navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <!-- Navigation content -->
+  <div class="collapse navbar-collapse" id="contentId">
+    <!-- links left -->
+    <ul class="navbar-nav mr-auto">
+
+      <li class="nav-item active">
+        <a class="nav-link" href="#">
+          <i class="fa fa-android"></i>
+          Jeu
+          <span class="sr-only">(current)</span>
+        </a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link" href="#">
+          <i class="fa fa-star"></i>
+          <span class="badge badge-pill badge-warning" [hidden]="badgeHidden">New</span>
+          Scores
+          <span class="sr-only">display badge if new scores are added</span>
+        </a>
+      </li>
+
+    </ul>
+
+    <!-- links right -->
+    <ul class="navbar-nav nav-flex-icons ml-auto">
+
+      <li class="nav-item">
+        <a href="#" class="nav-link"><i class="fa fa-facebook"></i></a>
+      </li>
+
+      <li class="nav-item">
+        <a href="#" class="nav-link"><i class="fa fa-git"></i></a>
+      </li>
+
+    </ul>
+
+  </div>
+</nav>
+
+<!-- to see
+<nav   [ngClass]="{
+  'navbar-dark':!windowScrolled,
+  'bg-dark': !windowScrolled,
+  'fixed-theme': windowScrolled}"
+   class="navbar navbar-icon-top fixed-top navbar-expand-md container-fluid"
+   #navbar>
+
+  <div class="container navbar-container" [class.fixed-theme]="windowScrolled">
+     Navbar Header with brand and toggle button -->
+<!-- Brand in left position -->
+<!-- Toggle button -->
+<!--
+    <a href="#" class="navbar-brand" [class.fixed-theme]="windowScrolled">Game</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#contentId" aria-controls="contentId" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>-->
+
+<!-- Navigation content -->
+<!--    <div class="collapse navbar-collapse">
+     --> <!-- links left -->
+<!--<div id="contentId">
+  <ul class="navbar-nav mr-auto">
+    <li class="nav-item active">
+      <a href="#" class="nav-link">
+        <i class="fa fa-android"></i>
+        Jeu
+      </a>
+    </li>
+    <li class="nav-item">
+      <a href="#" class="nav-link">
+        <i class="fa fa-star">
+          <span class="badge badge-pill badge-warning score-notification" [hidden]="badgeHidden">New</span>
+          <span class="sr-only">display if new scores are added</span>
+        </i>
+        Scores
+      </a>
+    </li>
+  </ul>
+</div>-->
+<!-- links right -->
+<!--<ul class="navbar-nav nav-flex-icons ml-auto">
+  <li class="nav-item">
+    <a href="#" class="nav-link"><i class="fa fa-facebook"></i></a>
+  </li>
+  <li class="nav-item">
+    <a href="#" class="nav-link"><i class="fa fa-git"></i></a>
+  </li>
+</ul>
+</div>
+</div>
+</nav>-->
+
+
+
+<!-- container (game and informations component) -->
+<div class="container">
+  <app-game-canvas></app-game-canvas>
+
+  <section>
+    <app-content-info></app-content-info>
+  </section>
+</div>
+<!-- end container -->
+
+<footer>
+  <p style="text-align: center">© Tous droits réservés</p>
+</footer>
+
