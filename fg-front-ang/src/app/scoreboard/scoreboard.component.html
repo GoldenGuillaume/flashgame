@@ -1,0 +1,67 @@
+<div class="container">
+  <div class="card text-center">
+
+    <!-- navigation -->
+    <div class="card-header">
+      <ul class="nav nav-pills card-header-pills">
+        <li class="nav-item">
+          <a class="nav-link active" href="">Statistiques</a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" href="">Tableau des scores</a>
+        </li>
+
+      </ul>
+    </div>
+    <!-- END navigation -->
+
+    <div class="card-body text-center">
+      <h5 class="card-title">Statistiques moyennes</h5>
+      <table class="table">
+        <thead class="thead-light">
+          <tr>
+            <th scope="col">Score moyen</th>
+            <th scope="col">Score le plus bas</th>
+            <th scope="col">Nombre de joueurs</th>
+            <th scope="col">Highscore</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr class="table-dark">
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="card-body text-center">
+      <h5 class="card-title">Scoreboard</h5>
+      <table class="table">
+        <thead class="thead-light">
+          <tr>
+            <th scope="col">Nr</th>
+            <th scope="col">Pseudo</th>
+            <th scope="col">Highscore</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr class="table-dark" *ngFor="let score of onFetchAllByRank()">
+            <td>{{ ++rank }}</td>
+            <td>{{ score.name }}</td>
+            <td>{{ score.score }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="card-footer text-muted">
+      Dernière mise à jour: {{ getDateUpdateFormatted() }}
+    </div>
+  </div>
+</div>

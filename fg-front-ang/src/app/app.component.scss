@@ -1,3 +1,52 @@
+.dropdown-content-centered {
+  text-align: center;
+}
+
+.warn-content {
+  color: darkred;
+  font-weight: bolder;
+}
+
+/* make the overlay responsive */
+.image {
+  width: 100%;
+  height: auto;
+}
+
+/* adjusting width of the overlay */
+.overlay-container {
+  position:relative;
+  width:100%;
+  max-width: max-content;
+}
+
+overlay-container + i, overlay + a {
+  margin-left: 5em;
+}
+
+/* when the user hover the image fade in the overlay */
+.overlay-container:hover .overlay {
+  opacity: 0.6;
+}
+/* overlay effect */
+.overlay {
+  position: absolute;
+  top: 0; bottom: 0; left: 0; right: 0;
+  height: 100%;
+  width: 100%;
+  opacity: 0;
+  transition: .3s ease;
+  background-color: azure;
+}
+
+.icon {
+  color: whitesmoke;
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+}
+
 /* setting of the icon-top styles */
 .navbar-icon-top .navbar-nav .nav-link > .fa {
   position: relative;

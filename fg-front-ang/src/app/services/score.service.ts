@@ -2,13 +2,7 @@ import { Injectable } from '@angular/core';
 import {HttpClient, HttpErrorResponse} from '@angular/common/http';
 import {Observable, throwError} from 'rxjs';
 import {catchError, retry} from 'rxjs/operators';
-
-export interface Score {
-  id:     number;
-  userIP: string;
-  name:   string;
-  score:  number;
-}
+import {Score} from '../models/score';
 
 @Injectable({
   providedIn: 'root'
@@ -25,6 +19,10 @@ export class ScoreService {
     return this.http.get<Score>('http://localhost:3000/api/ip/score').pipe(retry(1), catchError(this.handleError));
   }
 
+  getHighScore(): Observable<Score> {
+    return this.http.get<Score>('http://localhost:3000/api/highscore/').pipe(retry(1), catchError(this.handleError));
+  }
+
   getAllScores(): Observable<Score[]> {
     return this.http.get<Score[]>('http://localhost:3000/api/scores/').pipe(retry(1), catchError(this.handleError));
   }
@@ -34,7 +32,7 @@ export class ScoreService {
   }
 
   updateScore(score: Score): Observable<void> {
-    return this.http.put<void>('http://localhost:3000/api/scores/' + score.id, score).pipe(retry(1), catchError(this.handleError));
+    return this.http.put<void>('http://localhost:3000/api/scores/' + score._id, score).pipe(retry(1), catchError(this.handleError));
   }
 
   deleteScore(id: number) {
