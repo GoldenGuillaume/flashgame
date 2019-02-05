@@ -16,15 +16,31 @@ export class ScoreService {
   }
 
   getScoreOnIp(): Observable<Score> {
-    return this.http.get<Score>('http://localhost:3000/api/ip/score').pipe(retry(1), catchError(this.handleError));
+    return this.http.get<Score>('http://localhost:3000/api/scores/ip').pipe(retry(1), catchError(this.handleError));
   }
 
   getHighScore(): Observable<Score> {
-    return this.http.get<Score>('http://localhost:3000/api/highscore/').pipe(retry(1), catchError(this.handleError));
+    return this.http.get<Score>('http://localhost:3000/api/scores/highscore').pipe(retry(1), catchError(this.handleError));
+  }
+
+  getLowScore(): Observable<Score> {
+    return this.http.get<Score>('http://localhost:3000/api/scores/lowscore').pipe(retry(1), catchError(this.handleError));
   }
 
   getAllScores(): Observable<Score[]> {
-    return this.http.get<Score[]>('http://localhost:3000/api/scores/').pipe(retry(1), catchError(this.handleError));
+    return this.http.get<Score[]>('http://localhost:3000/api/scores').pipe(retry(1), catchError(this.handleError));
+  }
+
+  getAllScoresDesc(): Observable<Score[]> {
+    return this.http.get<Score[]>('http://localhost:3000/api/scores/desc').pipe(retry(1), catchError(this.handleError));
+  }
+
+  getCount(): Observable<number> {
+    return this.http.get<number>('http://localhost:3000/api/scores/count').pipe(retry(1), catchError(this.handleError));
+  }
+
+  getAverageScore(): Observable<number> {
+    return this.http.get<number>('http://localhost:3000/api/scores/avg').pipe(retry(1), catchError(this.handleError));
   }
 
   insertScore(score: Score): Observable<Score> {

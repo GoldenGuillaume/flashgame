@@ -3,20 +3,22 @@
 
     <!-- navigation -->
     <div class="card-header">
-      <ul class="nav nav-pills card-header-pills">
+      <ul class="nav nav-tabs card-header-tabs">
         <li class="nav-item">
-          <a class="nav-link active" href="">Statistiques</a>
+          <a class="nav-link" href="#" (click)="onClickHandler($event, 'stats')" [ngClass]="{'active': showStatus[0]}">Statistiques</a>
         </li>
 
         <li class="nav-item">
-          <a class="nav-link" href="">Tableau des scores</a>
+          <a class="nav-link" href="#" (click)="onClickHandler($event, 'scoreboard')" [ngClass]="{'active': showStatus[1]}">Tableau des scores</a>
         </li>
+
 
       </ul>
     </div>
     <!-- END navigation -->
 
-    <div class="card-body text-center">
+    <!-- reach on Stats nav link -->
+    <div class="card-body text-center" *ngIf="showStatus[0]">
       <h5 class="card-title">Statistiques moyennes</h5>
       <table class="table">
         <thead class="thead-light">
@@ -29,19 +31,20 @@
         </thead>
 
         <tbody>
-          <tr class="table-dark">
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
+          <tr class="table-light">
+            <td>{{ getAverageScore() }}</td>
+            <td>{{ getLowestScore() }}</td>
+            <td>{{ getEntriesCount()}}</td>
+            <td>{{ getHighScore() }}</td>
           </tr>
         </tbody>
       </table>
     </div>
 
-    <div class="card-body text-center">
+    <!-- reach on Scoreboard nav link -->
+    <div class="card-body text-center" *ngIf="showStatus[1]">
       <h5 class="card-title">Scoreboard</h5>
-      <table class="table">
+      <table class="table table-responsive-lg">
         <thead class="thead-light">
           <tr>
             <th scope="col">Nr</th>
@@ -51,8 +54,8 @@
         </thead>
 
         <tbody>
-          <tr class="table-dark" *ngFor="let score of onFetchAllByRank()">
-            <td>{{ ++rank }}</td>
+          <tr class="table-light" *ngFor="let score of getAllScoresByRank()">
+            <td [ngStyle]="setPodiumStyle()">{{ getRankPosition() }}</td>
             <td>{{ score.name }}</td>
             <td>{{ score.score }}</td>
           </tr>
@@ -60,6 +63,7 @@
       </table>
     </div>
 
+    <!-- footer containing last update date -->
     <div class="card-footer text-muted">
       Dernière mise à jour: {{ getDateUpdateFormatted() }}
     </div>
