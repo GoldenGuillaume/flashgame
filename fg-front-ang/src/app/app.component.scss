@@ -1,11 +1,39 @@
-.dropdown-content-centered {
-  text-align: center;
+/*
+ * @Note
+ * For problems of priority CSS follow the indications bellow
+ * priority points:
+ *    id = 100
+ *    classes/pseudo-classes = 10
+ *    tag selectors/pseudo-elements = 1
+ */
+.dropdown-menu {
+  text-align:center;
+  width: 20vw;
 }
 
 .warn-content {
   color: darkred;
   font-weight: bolder;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 /* make the overlay responsive */
 .image {

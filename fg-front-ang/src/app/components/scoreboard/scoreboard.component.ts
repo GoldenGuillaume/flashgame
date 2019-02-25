@@ -1,13 +1,13 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {Score} from '../models/score';
-import {ScoreService} from '../services/score.service';
+import {Component, Input, OnChanges, OnInit} from '@angular/core';
+import {Score} from '../../models/score';
+import {ScoreService} from '../../services/score.service';
 
 @Component({
   selector: 'app-scoreboard',
   templateUrl: './scoreboard.component.html',
   styleUrls: ['./scoreboard.component.scss']
 })
-export class ScoreboardComponent implements OnInit {
+export class ScoreboardComponent implements OnInit, OnChanges {
   /* value get from the parent component */
   @Input()
   highscore: number;
@@ -33,8 +33,30 @@ export class ScoreboardComponent implements OnInit {
    * initialization of all of the values in the beginning of the lifecycle hook and
    * calls to the Rest Api to fetch the scores
    */
-  ngOnInit() {
+  ngOnInit(): void {
     this.showStatus = [true, false];
+    this.updateTime = new Date();
+    this.score.getAllScoresDesc().subscribe( score => {
+      this.listScoreDesc = score;
+    });
+    this.score.getCount().subscribe( count => {
+      this.count = count;
+    });
+    this.score.getLowScore().subscribe( score => {
+      this.lowscore = score.score;
+    });
+    this.score.getAverageScore().subscribe( avg => {
+      this.avgscore = parseInt(avg.toFixed(0), 10);
+    });
+  }
+
+  /**
+   * @description
+   * reload of all of the values when changes are made during
+   * the lifecycle hook and calls to the Rest Api to fetch
+   * back the scores.
+   */
+  ngOnChanges(): void {
     this.updateTime = new Date();
     this.score.getAllScoresDesc().subscribe( score => {
       this.listScoreDesc = score;

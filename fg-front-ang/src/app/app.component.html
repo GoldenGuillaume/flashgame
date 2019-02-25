@@ -1,4 +1,4 @@
-<nav class="navbar navbar-icon-top navbar-expand-lg navbar-light bg-light" role="navigation">
+<nav class="navbar navbar-icon-top navbar-expand-lg navbar-light bg-light" role="navigation" #navbar>
 
   <div class="container">
     <!-- Navbar Header with brand and toggle button -->
@@ -39,12 +39,12 @@
 
         <div class="btn-group nav-item">
           <button type="button" class="btn btn-light dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <span class="fa fa-user-circle"></span>
+            <span class="fa fa-user-circle fa-2x"></span>
             <span class="sr-only">dropdown activation</span>
           </button>
 
           <!-- player dropdown menu -->
-          <div class="dropdown-menu dropdown-content-centered">
+          <div class="dropdown-menu px-4 py-2">
             <h6 class="dropdown-header">Welcome!</h6>
             <a class="dropdown-item-text" aria-label="Change your avatar" href="">
               <div *ngIf="false; else noAvatar">
@@ -65,12 +65,12 @@
               </ng-template>
             </a>
 
-            <p class="dropdown-item-text">Le meilleur score enregistré est actuellement: <span class="warn-content">{{ contentScores.highScore }}</span></p>
-            <p class="dropdown-item-text">Votre meilleur score est: <span class="warn-content">{{ contentScores.userScore.score }}</span></p>
+            <p class="dropdown-item-text">Le meilleur score actuel: <span class="warn-content">{{ highscore }}</span></p>
+            <p class="dropdown-item-text">Votre meilleur score: <span class="warn-content">{{ userScore.score }}</span></p>
 
             <div class="dropdown-divider"></div>
             <p class="dropdown-item-text">Si vous souhaitez supprimer votre score sauvegardé en base cliquez sur le bouton ci-dessous, Attention action irréversible!</p>
-            <button type="button" class="btn btn-warning" (click)="onClickReset()">Reset</button>
+            <button type="button" class="btn btn-warning" (click)="onClickHandlerReset($event)">Reset</button>
           </div>
           <!-- END player informations menu -->
 
@@ -92,7 +92,9 @@
   </div>
 
 </nav>
-<app-scoreboard [highscore]="contentScores.highScore"></app-scoreboard>
+
+<app-game></app-game>
+<app-scoreboard [highscore]="highscore"></app-scoreboard>
 <footer>
   <p style="text-align: center">© Tous droits réservés</p>
 </footer>

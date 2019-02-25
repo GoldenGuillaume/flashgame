@@ -8,11 +8,10 @@ import {Score} from './models/score';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit, AfterViewInit {
-  // @ts-ignore
-  contentScores: {
-    highScore: number,
-    userScore: Score
-  } = {};
+
+  highscore: number;
+  userScore: Score;
+
   scroll: boolean;
   badgeHidden: boolean;
   private yOffSet: any;
@@ -22,42 +21,51 @@ export class AppComponent implements OnInit, AfterViewInit {
   constructor(private score: ScoreService) {
     this.scroll         = false;
     this.badgeHidden    = true;
+    this.userScore = new Score();
   }
 
+  /**
+   * @description
+   * initialization of all of the values in the beginning of the lifecycle hook and
+   * calls to the Rest Api to fetch the user score and highscore.
+   */
   ngOnInit(): void {
     this.score.getHighScore().subscribe( score => {
-      console.log('Score value: ' + score.score);
-      console.log('Object: ' + score);
-      this.contentScores.highScore = score.score;
+      this.highscore = score.score;
     });
     this.score.getScoreOnIp().subscribe( score => {
-      console.log('Score value: ' + score.score);
-      console.log('Object: ' + score);
-      this.contentScores.userScore = score;
+      this.userScore = score;
     });
   }
 
+  /**
+   * @description
+   * setting of the vertical offset after the view being initiated
+   * in the lifecycle hook.
+   */
   ngAfterViewInit(): void {
     this.yOffSet = this.navElement.nativeElement.offsetTop;
   }
 
-  onClickReset(): void {
-    console.log('----------INFO------------');
-    console.log(this.contentScores.highScore);
-    console.log(this.contentScores.userScore.score);
-    console.log(this.contentScores.userScore._id);
-    console.log('--------------------------');
-    this.score.deleteScore(this.contentScores.userScore._id);
+  /**
+   * @description
+   * click event who start the API call to reset the current user score.
+   * @param event : Object associated to event reached.
+   */
+  onClickHandlerReset(event: Event): void {
+    event.stopPropagation();
+    event.preventDefault();
+    this.score.deleteScore(this.userScore._id);
   }
 
+  /**
+   * @description
+   * event reached on windows scroll detection.
+   */
   @HostListener('window:scroll', ['$event'])
   onWindowScroll(): void {
     const currYOffset = window.pageYOffset;
 
-    if (this.yOffSet < currYOffset) {
-      this.scroll = true;
-    } else {
-      this.scroll = false;
-    }
+    this.scroll = this.yOffSet < currYOffset;
   }
 }

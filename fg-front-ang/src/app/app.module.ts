@@ -3,12 +3,14 @@ import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
 import {HttpClientModule} from '@angular/common/http';
-import { ScoreboardComponent } from './scoreboard/scoreboard.component';
+import { ScoreboardComponent } from './components/scoreboard/scoreboard.component';
+import { GameComponent } from './components/game/game.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    ScoreboardComponent
+    ScoreboardComponent,
+    GameComponent
   ],
   imports: [
     BrowserModule,
