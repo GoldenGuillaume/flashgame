@@ -66,7 +66,7 @@
             </a>
 
             <p class="dropdown-item-text">Le meilleur score actuel: <span class="warn-content">{{ highscore }}</span></p>
-            <p class="dropdown-item-text">Votre meilleur score: <span class="warn-content">{{ userScore.score }}</span></p>
+            <p *ngIf="userScore.score !== undefined" class="dropdown-item-text">Votre meilleur score: <span class="warn-content">{{ userScore.score }}</span></p>
 
             <div class="dropdown-divider"></div>
             <p class="dropdown-item-text">Si vous souhaitez supprimer votre score sauvegardé en base cliquez sur le bouton ci-dessous, Attention action irréversible!</p>
@@ -93,7 +93,7 @@
 
 </nav>
 
-<app-game></app-game>
+<app-game [userScore]="userScore"></app-game>
 <app-scoreboard [highscore]="highscore"></app-scoreboard>
 <footer>
   <p style="text-align: center">© Tous droits réservés</p>

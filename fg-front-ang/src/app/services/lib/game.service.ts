@@ -27,6 +27,7 @@ export class GameService {
   gameLoop = null;
   keysAction: Map<string, boolean>;
 
+  gameOver: boolean;
   score: number;
 
   constructor() {
@@ -47,19 +48,25 @@ export class GameService {
     });
   }
 
-  startGame(): void {
+  startGame(): Promise<number> {
     this.score = 0;
+    this.gameOver = false;
     /* launch the loop every 10 miliseconds */
-    this.gameLoop = setInterval(() => {
-      this.suffleProperties();
-      this.cleanCanvas();
-      this.renderBackground();
-      this.createObstacles();
-      this.moveObstacles();
-      this.createPlayer();
-      this.updateScore();
-    }, 10);
-    alert('Game Over');
+    return new Promise<number>((resolve) => {
+      this.gameLoop = setInterval(() => {
+        this.suffleProperties();
+        this.cleanCanvas();
+        this.renderBackground();
+        this.createObstacles();
+        this.moveObstacles();
+        this.createPlayer();
+        this.updateScore();
+        if (this.gameOver) {
+          resolve(this.score);
+        }
+        console.log(this.score);
+      }, 10);
+    });
     // window.location.reload();
   }
 
@@ -92,7 +99,7 @@ export class GameService {
     const randomVehicle: SingleObstacles = CONFIG.vehicles[Math.floor(Math.random() * CONFIG.vehicles.length)];
 
     this.obstacles.push(new function () {
-      this.x = Math.floor(Math.random() * 450);
+      this.x = Math.floor(Math.random() * CONFIG.canvasWidth - 50);
       this.y = Math.floor(Math.random() * -15);
       this.width = randomVehicle.width;
       this.height = randomVehicle.height;
@@ -160,10 +167,7 @@ export class GameService {
         ((this.player.x + CONFIG.playerCar.width > obstacle.x) && (this.player.y + CONFIG.playerCar.height > obstacle.y)) &&
         ((this.player.x < obstacle.x + obstacle.width) && (this.player.y + CONFIG.playerCar.height > obstacle.y))) {
       clearInterval(this.gameLoop);
+      this.gameOver = true;
     }
-  }
-
-  getScore(): number {
-    return this.score;
   }
 }

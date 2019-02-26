@@ -19,7 +19,15 @@ router.route('/scores')
     })
     /* POST insert a score */
     .post(function (req, res) {
-        let newScore = new Score(req.body);
+        let remoteClientIP;
+        let env = process.env.NODE_ENV || 'development';
+        if(env !== 'development'){
+            remoteClientIP = requestIp.getClientIp(req);
+        } else{
+            remoteClientIP = '127.0.0.1'
+        }
+        console.log(req.body);
+        let newScore = new Score({userIp: remoteClientIP, name: req.body.name, score: req.body.score});
         newScore.save(function (err) {
             if (err){
                 return res.send(err);

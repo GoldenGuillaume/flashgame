@@ -60,8 +60,7 @@ export class ScoreService {
     return this.http.put<void>('http://localhost:3000/api/scores/' + score._id, score).pipe(retry(1), catchError(ScoreService.handleError));
   }
 
-  deleteScore(id: number) {
+  deleteScore(id: string) {
     return this.http.delete('http://localhost:3000/api/scores/' + id).pipe(retry(1), catchError(ScoreService.handleError));
   }
-  /* TODO: add method to get the best score */
 }

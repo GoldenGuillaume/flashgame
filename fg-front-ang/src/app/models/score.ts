@@ -3,7 +3,7 @@
  * @classdesc The model used to store data recovered from the Rest API.
  */
 export class Score {
-  _id:     number;
+  _id:     string;
   userIp: string;
   name:   string;
   score:  number;
@@ -14,4 +14,12 @@ export class Score {
    * @constructor
    */
   constructor() { }
+
+  setName (name: string): void {
+    this.name = name;
+  }
+
+  setScore (score: number): void {
+    this.score = score;
+  }
 }
