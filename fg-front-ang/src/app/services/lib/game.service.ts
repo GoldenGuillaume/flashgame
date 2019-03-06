@@ -168,7 +168,7 @@ export class GameService {
    */
   moveObstacles(): void {
     this.obstacles.forEach((element: Obstacles, index: number) => {
-      element.y += 3;
+      element.y += this.obstacleSpeed;
       element.update();
       this.checkCollision(element);
       if (element.y > this.height) {
