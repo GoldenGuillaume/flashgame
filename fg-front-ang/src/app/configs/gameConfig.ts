@@ -1,5 +1,8 @@
 import { SingleObstacles } from '../interfaces/singleObstacles';
 
+/**
+ * Game constants
+ */
 export const canvasHeight = 650;
 export const canvasWidth = 700;
 export const frameNumber = 0;

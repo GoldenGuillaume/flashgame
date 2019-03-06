@@ -4,12 +4,12 @@
   <canvas #gameCanvas>Your browser doesn't support canvas elements</canvas>
 </div>
 
-<div class="modal" tabindex="-1" role="dialog" [hidden]="showModal">
+<div class="modal fade" tabindex="-1" role="dialog" [style]="modalState()" aria-hidden="false">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <form (ngSubmit)="onSubmit(form)" #form="ngForm">
         <div class="modal-header">
-          <h5 class="modal-title">Modal title</h5>
+          <h5 class="modal-title">Insérez votre score</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -17,16 +17,16 @@
         <div class="modal-body">
           <div class="form-group">
             <label for="pseudoInput">Pseudo: </label>
-            <input type="text" class="form-control form-control-lg" id="pseudoInput" placeholder="votre pseudo" name="pseudo" required ngModel>
+            <input type="text" class="form-control form-control-lg" id="pseudoInput" placeholder="votre pseudo" name="pseudo" ngModel required>
           </div>
 
           <div class="form-group">
             <label for="scoreInput">Score: </label>
-            <input type="number" class="form-control-plaintext" id="scoreInput" [value]="score" readonly>
+            <input type="number" class="form-control-plaintext" id="scoreInput" [value]="userScore.score" readonly>
           </div>
         </div>
         <div class="modal-footer">
-          <button type="submit" class="btn btn-primary">Save Score</button>
+          <button type="submit" class="btn btn-primary" [disabled]="form.invalid">Save Score</button>
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
         </div>
       </form>

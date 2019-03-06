@@ -12,16 +12,32 @@ export class AppService {
 
   constructor(private game: GameService) { }
 
+  /**
+   * @description
+   * load the sprite then emit an event who permit to trigger the game loop.
+   * @param canvasElement : the canvas where the game is displayed
+   */
   createGameEnvironment(canvasElement): void {
     this.game.loadSpritesAssets(canvasElement).then( () => {
       this.isAssetsLoaded.emit();
     });
   }
 
+  /**
+   * @description
+   * getter for the EventEmitter
+   * @return EventEmitter<number> : return the state of the Event
+   */
   getAssetsLoadedEmitter(): EventEmitter<number> {
     return this.isAssetsLoaded;
   }
 
+  /**
+   * @description
+   * Players keyboard input manager.
+   * @param event : the keyboard event reached.
+   * @param type : the type of event reached.
+   */
   movePlayer(event: KeyboardEvent, type: string): void {
     if (type === KeyEvent.PRESSED) {
       /* to prevent the scrolling of the page */

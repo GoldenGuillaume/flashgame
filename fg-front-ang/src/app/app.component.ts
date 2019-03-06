@@ -34,7 +34,10 @@ export class AppComponent implements OnInit, AfterViewInit {
       this.highscore = score.score;
     });
     this.score.getScoreOnIp().subscribe( score => {
-      this.userScore = score;
+      if (score !== null) {
+        this.userScore = score;
+      }
+
     });
   }
 

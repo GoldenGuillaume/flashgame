@@ -4,6 +4,7 @@ import {GameService} from '../../services/lib/game.service';
 import {Score} from '../../models/score';
 import {ScoreService} from '../../services/score.service';
 import {NgForm} from '@angular/forms';
+import {DomSanitizer} from '@angular/platform-browser';
 
 @Component({
   selector: 'app-game',
@@ -19,6 +20,10 @@ export class GameComponent implements AfterViewInit {
   userScore: Score;
 
   @ViewChild('gameCanvas') canvas: ElementRef;
+
+  /**
+   * Keyboards events handlers for game interaction
+   */
   @HostListener('document:keydown', ['$event']) onKeyDownHandler(event: KeyboardEvent) {
     this.loader.movePlayer(event, 'keydown');
   }
@@ -27,8 +32,13 @@ export class GameComponent implements AfterViewInit {
     this.loader.movePlayer(event, 'keyup');
   }
 
-  constructor(private loader: AppService, private game: GameService, private score: ScoreService) {}
+  constructor(private loader: AppService, private game: GameService, private score: ScoreService, private sanitizer: DomSanitizer) {}
 
+  /**
+   * @description
+   * Subscription to the loader for the game assets who finalize with the
+   * launch of the game loop and the retrieving of score.
+   */
   ngAfterViewInit(): void {
     this.loader.createGameEnvironment(this.canvas.nativeElement);
     this.subscribed = this.loader.getAssetsLoadedEmitter().subscribe(() => {
@@ -50,6 +60,11 @@ export class GameComponent implements AfterViewInit {
   }
 
 
+  /**
+   * @description
+   * Submit of the form to register score for new players after the game end
+   * @param form : the form content
+   */
   onSubmit(form: NgForm): void {
     this.showModal = false;
     this.userScore.setName(form.value['pseudo']);
@@ -59,4 +74,18 @@ export class GameComponent implements AfterViewInit {
     console.log('in the submit method!');
   }
 
+  /**
+   * @description
+   * change the visibility of the modal when the game is finish.
+   */
+  modalState() {
+    let style;
+    if (this.showModal) {
+      style = 'display: block; z-index:1';
+    } else {
+      style = 'display: none';
+    }
+
+    return this.sanitizer.bypassSecurityTrustStyle(style);
+  }
 }
