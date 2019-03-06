@@ -81,7 +81,7 @@ export class GameComponent implements AfterViewInit {
   modalState() {
     let style;
     if (this.showModal) {
-      style = 'display: block; z-index:1';
+      style = 'display: block;';
     } else {
       style = 'display: none';
     }

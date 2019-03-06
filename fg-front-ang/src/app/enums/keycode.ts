@@ -3,5 +3,5 @@ export enum KeyCode {
   RIGHT_ARROW = 'ArrowRight',
   UP_ARROW = 'ArrowUp',
   DOWN_ARROW = 'ArrowDown',
-  SPACE = 'Space'
+  SPACE = ' '
 }
