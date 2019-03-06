@@ -42,27 +42,33 @@ export class AppService {
     if (type === KeyEvent.PRESSED) {
       /* to prevent the scrolling of the page */
       event.preventDefault();
-      if (event.key === KeyCode.LEFT_ARROW) {
-        this.game.keysAction.set('moveLeft', true);
-        this.game.keysAction.set('moveRight', false);
-        this.game.keysAction.set('moveUp', false);
-        this.game.keysAction.set('moveDown', false);
-      } else if (event.key === KeyCode.RIGHT_ARROW) {
-        this.game.keysAction.set('moveRight', true);
-        this.game.keysAction.set('moveLeft', false);
-        this.game.keysAction.set('moveUp', false);
-        this.game.keysAction.set('moveDown', false);
-      } else if (event.key === KeyCode.UP_ARROW) {
-        this.game.keysAction.set('moveUp', true);
-        this.game.keysAction.set('moveLeft', false);
-        this.game.keysAction.set('moveRight', false);
-        this.game.keysAction.set('moveDown', false);
-      } else if (event.key === KeyCode.DOWN_ARROW) {
-        this.game.keysAction.set('moveDown', true);
-        this.game.keysAction.set('moveLeft', false);
-        this.game.keysAction.set('moveRight', false);
-        this.game.keysAction.set('moveUp', false);
+      /* check for pausing the game */
+      if (event.key === KeyCode.SPACE) {
+        this.game.onBreak = !this.game.onBreak;
+      } else {
+        if (event.key === KeyCode.LEFT_ARROW) {
+          this.game.keysAction.set('moveLeft', true);
+          this.game.keysAction.set('moveRight', false);
+          this.game.keysAction.set('moveUp', false);
+          this.game.keysAction.set('moveDown', false);
+        } else if (event.key === KeyCode.RIGHT_ARROW) {
+          this.game.keysAction.set('moveRight', true);
+          this.game.keysAction.set('moveLeft', false);
+          this.game.keysAction.set('moveUp', false);
+          this.game.keysAction.set('moveDown', false);
+        } else if (event.key === KeyCode.UP_ARROW) {
+          this.game.keysAction.set('moveUp', true);
+          this.game.keysAction.set('moveLeft', false);
+          this.game.keysAction.set('moveRight', false);
+          this.game.keysAction.set('moveDown', false);
+        } else if (event.key === KeyCode.DOWN_ARROW) {
+          this.game.keysAction.set('moveDown', true);
+          this.game.keysAction.set('moveLeft', false);
+          this.game.keysAction.set('moveRight', false);
+          this.game.keysAction.set('moveUp', false);
+        }
       }
+
     } else if (type === KeyEvent.RELEASED) {
       this.game.keysAction.set('moveDown', false);
       this.game.keysAction.set('moveLeft', false);

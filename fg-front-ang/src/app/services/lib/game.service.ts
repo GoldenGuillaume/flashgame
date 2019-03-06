@@ -13,6 +13,7 @@ export class GameService {
   @Input() width: number = CONFIG.canvasWidth;
   @Input() height: number = CONFIG.canvasHeight;
 
+  onBreak: boolean = false;
   obstacleSpeed: number;
   frameNumber: number = CONFIG.frameNumber;
   obstacles: Array<Obstacles> = [];
@@ -69,19 +70,21 @@ export class GameService {
     /* launch the loop every 10 miliseconds */
     return new Promise<number>((resolve) => {
       this.gameLoop = setInterval(() => {
-        this.suffleProperties();
-        this.cleanCanvas();
-        this.renderBackground();
-        this.updateDifficulty();
-        this.createObstacles();
-        this.moveObstacles();
-        this.createPlayer();
-        this.updateScore();
+        if (!this.onBreak) {
+          this.suffleProperties();
+          this.cleanCanvas();
+          this.renderBackground();
+          this.updateDifficulty();
+          this.createObstacles();
+          this.moveObstacles();
+          this.createPlayer();
+          this.updateScore();
 
-        if (this.gameOver) {
-          resolve(this.score);
+          if (this.gameOver) {
+            resolve(this.score);
+          }
+          console.log(this.score);
         }
-        console.log(this.score);
       }, 10);
     });
     // window.location.reload();
